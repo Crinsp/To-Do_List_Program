@@ -1,9 +1,14 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ToDoList {
 
     private static Scanner scnr = new Scanner (System.in);
+    private static final String FILE_NAME = "ToDoSave.txt";
 
     //Listing out the options the user has to work with.
     public static void listOfOptions(){
@@ -14,7 +19,8 @@ public class ToDoList {
                 scnr.nextLine();
 
                 if (decision == 4) {
-                    System.out.println("Exiting program...");
+                    System.out.println("Saving file and exiting...");
+                    saveFile();
                     System.exit(0);
                     break;
                 }
@@ -24,6 +30,30 @@ public class ToDoList {
                 System.out.println("Invalid input. Please enter a number.");
                 scnr.nextLine();
             }
+        }
+    }
+
+    public static void saveFile(){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))){
+            for(String task : listItself.taskList){
+                writer.write(task);
+                writer.newLine();
+            }
+        }
+        catch(IOException e){
+            System.out.println("Error saving your tasks: " + e.getMessage());
+        }
+    }
+
+    public static void loadSave(){
+        try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))){
+            String line;
+            while((line = reader.readLine()) != null){
+                listItself.taskList.add(line);
+            }
+        }
+        catch(IOException e){
+            System.out.println("Error while reading your file: " + e.getMessage());
         }
     }
 
@@ -46,12 +76,14 @@ public class ToDoList {
         System.out.println("Adding a task");
         String task = scnr.nextLine();
         listItself.taskList.add(task);
+        //saveFile();
     }
 
     //removes a task when called (unfinished).
     public static void removeATask(){
         if(listItself.taskList.isEmpty()){
             System.out.println("The list is empty. Nothing to remove.");
+            //saveFile();
             return;
         }
 
@@ -87,6 +119,7 @@ public class ToDoList {
 
     //Initialize the program and start off on the list of options.
     public static void main(String[] args) {
+        loadSave();
         listOfOptions();
         System.exit(0);
     }
