@@ -13,7 +13,7 @@ public class ToDoList {
     //Listing out the options the user has to work with.
     public static void listOfOptions(){
         while (true) { // Use a loop instead of recursion
-            System.out.println("Enter a number to select: \n1. Add a task\n2. Remove a task\n3. View the list\n4. Exit the program");
+            System.out.println("Enter a number to select: \n1. Add a task\n2. Remove a task\n3. View the list\n4. Exit the program\n5. Clear all tasks");
             if(scnr.hasNextInt()){
                 int decision = scnr.nextInt();
                 scnr.nextLine();
@@ -21,6 +21,7 @@ public class ToDoList {
                 if (decision == 4) {
                     System.out.println("Saving file and exiting...");
                     saveFile();
+                    scnr.close();
                     System.exit(0);
                     break;
                 }
@@ -76,14 +77,14 @@ public class ToDoList {
         System.out.println("Adding a task");
         String task = scnr.nextLine();
         listItself.taskList.add(task);
-        //saveFile();
+        saveFile();
     }
 
     //removes a task when called (unfinished).
     public static void removeATask(){
         if(listItself.taskList.isEmpty()){
             System.out.println("The list is empty. Nothing to remove.");
-            //saveFile();
+            saveFile();
             return;
         }
 
@@ -100,6 +101,22 @@ public class ToDoList {
         listOfOptions();
     }
 
+    //Unfinished atm, needs to be edited.
+    /*
+    public static void clearAll(){
+        System.out.println("Are you sure you want to clear all tasks from the list? (y/n)");
+        String clearDecision = scnr.nextLine();
+        if(clearDecision == "y"){
+            for (int i = 0; i < listItself.taskList.size(); i++) {
+                listItself.taskList.remove(i);
+            }
+        }
+        else if(clearDecision == "n"){
+           listOfOptions();
+        }
+    }
+     */
+
     //Where your options go to when making the decision within listOfOptions().
     public static void options(int decision){
         switch(decision){
@@ -112,6 +129,10 @@ public class ToDoList {
             case 3:
                 printItOut();
                 break;
+            /*case 5:
+                clearAll();
+                break;
+             */
             default:
                 System.out.println("Invalid option. Try again.");
         }
