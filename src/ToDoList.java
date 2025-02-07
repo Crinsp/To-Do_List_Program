@@ -2,8 +2,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ToDoList {
 
@@ -102,20 +100,17 @@ public class ToDoList {
     }
 
     //Unfinished atm, needs to be edited.
-    /*
     public static void clearAll(){
         System.out.println("Are you sure you want to clear all tasks from the list? (y/n)");
         String clearDecision = scnr.nextLine();
-        if(clearDecision == "y"){
-            for (int i = 0; i < listItself.taskList.size(); i++) {
-                listItself.taskList.remove(i);
-            }
+        if(clearDecision.equalsIgnoreCase("y")){
+            listItself.taskList.clear();
+            saveFile();
         }
         else if(clearDecision == "n"){
            listOfOptions();
         }
     }
-     */
 
     //Where your options go to when making the decision within listOfOptions().
     public static void options(int decision){
@@ -129,10 +124,9 @@ public class ToDoList {
             case 3:
                 printItOut();
                 break;
-            /*case 5:
+            case 5:
                 clearAll();
                 break;
-             */
             default:
                 System.out.println("Invalid option. Try again.");
         }
