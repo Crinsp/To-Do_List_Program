@@ -44,14 +44,22 @@ public class ToDoList {
         }
     }
 
-    public static void loadSave(){
-        try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))){
-            String line;
-            while((line = reader.readLine()) != null){
-                listItself.taskList.add(line);
+    public static void loadSave() {
+        File file = new File(FILE_NAME);
+
+        try {
+            if (!file.exists()) {
+                file.createNewFile(); // Create the file if it doesn't exist
+                return;
             }
-        }
-        catch(IOException e){
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    listItself.taskList.add(line);
+                }
+            }
+        } catch (IOException e) {
             System.out.println("Error while reading your file: " + e.getMessage());
         }
     }
