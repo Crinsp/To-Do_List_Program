@@ -6,10 +6,9 @@ import java.io.IOException;
 public class ToDoList {
 
     private static Scanner scnr = new Scanner (System.in);
-    private static final String FILE_NAME = "ToDoSave.txt";
+    public static final String FILE_NAME = "ToDoSave.txt";
 
-
-    public static void saveFile(){
+    /*public static void saveFile(){
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))){
             for(String task : listItself.taskList){
                 writer.write(task);
@@ -19,7 +18,7 @@ public class ToDoList {
         catch(IOException e){
             System.out.println("Error saving your tasks: " + e.getMessage());
         }
-    }
+    }*/
 
     public static void loadSave() {
         File file = new File(FILE_NAME);
@@ -60,14 +59,14 @@ public class ToDoList {
         System.out.println("Adding a task");
         String task = scnr.nextLine();
         listItself.taskList.add(task);
-        saveFile();
+        SaveFile.saveFile();
     }
 
     //removes a task when called (unfinished).
     public static void removeATask(){
         if(listItself.taskList.isEmpty()){
             System.out.println("The list is empty. Nothing to remove.");
-            saveFile();
+            SaveFile.saveFile();
             return;
         }
 
@@ -90,7 +89,7 @@ public class ToDoList {
         String clearDecision = scnr.nextLine();
         if(clearDecision.equalsIgnoreCase("y")){
             listItself.taskList.clear();
-            saveFile();
+            SaveFile.saveFile();
         }
         else if(clearDecision == "n"){
            OptionsList.listOfOptions();

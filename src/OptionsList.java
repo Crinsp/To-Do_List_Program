@@ -11,7 +11,7 @@ public class OptionsList extends ToDoList{
 
                 if (decision == 4) {
                     System.out.println("Saving file and exiting...");
-                    saveFile();
+                    SaveFile.saveFile();
                     scnr.close();
                     System.exit(0);
                     break;
