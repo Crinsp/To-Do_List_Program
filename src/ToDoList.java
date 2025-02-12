@@ -8,29 +8,6 @@ public class ToDoList {
     private static Scanner scnr = new Scanner (System.in);
     private static final String FILE_NAME = "ToDoSave.txt";
 
-    //Listing out the options the user has to work with.
-    public static void listOfOptions(){
-        while (true) { // Use a loop instead of recursion
-            System.out.println("Enter a number to select: \n1. Add a task\n2. Remove a task\n3. View the list\n4. Exit the program\n5. Clear all tasks");
-            if(scnr.hasNextInt()){
-                int decision = scnr.nextInt();
-                scnr.nextLine();
-
-                if (decision == 4) {
-                    System.out.println("Saving file and exiting...");
-                    saveFile();
-                    scnr.close();
-                    System.exit(0);
-                    break;
-                }
-                options(decision);
-            }
-            else{
-                System.out.println("Invalid input. Please enter a number.");
-                scnr.nextLine();
-            }
-        }
-    }
 
     public static void saveFile(){
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))){
@@ -102,9 +79,9 @@ public class ToDoList {
         }
         else {
             System.out.println("Element does not exist and/or exceeds the length of the list: ");
-            listOfOptions();
+            OptionsList.listOfOptions();
         }
-        listOfOptions();
+        OptionsList.listOfOptions();
     }
 
     //Unfinished atm, needs to be edited.
@@ -116,7 +93,7 @@ public class ToDoList {
             saveFile();
         }
         else if(clearDecision == "n"){
-           listOfOptions();
+           OptionsList.listOfOptions();
         }
     }
 
@@ -143,7 +120,7 @@ public class ToDoList {
     //Initialize the program and start off on the list of options.
     public static void main(String[] args) {
         loadSave();
-        listOfOptions();
+        OptionsList.listOfOptions();
         System.exit(0);
     }
 }
