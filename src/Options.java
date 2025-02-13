@@ -3,16 +3,16 @@ public class Options {
     public static void options(int decision){
         switch(decision){
             case 1:
-                ToDoList.addATask();
+                AddATask.addATask();
                 break;
             case 2:
-                ToDoList.removeATask();
+                RemoveATask.removeATask();
                 break;
             case 3:
-                ToDoList.printItOut();
+                PrintItOut.printItOut();
                 break;
             case 5:
-                ToDoList.clearAll();
+                ClearAll.clearAll();
                 break;
             default:
                 System.out.println("Invalid option. Try again.");
