@@ -16,7 +16,7 @@ public class OptionsList extends ToDoList{
                     System.exit(0);
                     break;
                 }
-                options(decision);
+                Options.options(decision);
             }
             else{
                 System.out.println("Invalid input. Please enter a number.");
